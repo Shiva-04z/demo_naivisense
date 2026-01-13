@@ -1311,26 +1311,31 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
             ],
           ),
           SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: _buildTherapistCard(
-                  controller.currentPlan['therapist1'],
-                  controller.currentPlan['therapist1Specialty'],
-                  'assets/therapist1.png',
-                  primaryTeal,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Container(
+                  height: 200,
+                  child: _buildTherapistCard(
+                    controller.currentPlan['therapist1'],
+                    controller.currentPlan['therapist1Specialty'],
+                    'assets/therapist1.png',
+                    primaryTeal,
+                  ),
                 ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: _buildTherapistCard(
-                  controller.currentPlan['therapist2'],
-                  controller.currentPlan['therapist2Specialty'],
-                  'assets/therapist2.png',
-                  accentTeal,
+                SizedBox(width: 16),
+                Container(
+                  height: 200,
+                  child: _buildTherapistCard(
+                    controller.currentPlan['therapist2'],
+                    controller.currentPlan['therapist2Specialty'],
+                    'assets/therapist2.png',
+                    accentTeal,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
