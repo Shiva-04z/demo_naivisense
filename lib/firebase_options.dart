@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBRBXoQeT6M8cYTgXDaNeSeWJnm2K98j_A',
-    appId: '1:130407171862:web:b6b5e393ea81fa4dbdf237',
-    messagingSenderId: '130407171862',
-    projectId: 'ai-interview-d54b7',
-    authDomain: 'ai-interview-d54b7.firebaseapp.com',
-    storageBucket: 'ai-interview-d54b7.firebasestorage.app',
-    measurementId: 'G-CE71LLT09D',
+    apiKey: 'AIzaSyAXB2S1XUA559yh6OTh59TMHmPNnWKIpqM',
+    appId: '1:446641751122:web:373ed3aec2c2b25a180b8b',
+    messagingSenderId: '446641751122',
+    projectId: 'naivisense-demo',
+    authDomain: 'naivisense-demo.firebaseapp.com',
+    storageBucket: 'naivisense-demo.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDrZM9c2x7lzpuNAtHeo6b1bzXYEoVfhxU',
-    appId: '1:130407171862:android:d84c7dbac9301771bdf237',
-    messagingSenderId: '130407171862',
-    projectId: 'ai-interview-d54b7',
-    storageBucket: 'ai-interview-d54b7.firebasestorage.app',
+    apiKey: 'AIzaSyC9vlwEasSW4daGseEGT-LUx9bc0FbHRII',
+    appId: '1:446641751122:android:8c435efa74a7c9ab180b8b',
+    messagingSenderId: '446641751122',
+    projectId: 'naivisense-demo',
+    storageBucket: 'naivisense-demo.firebasestorage.app',
   );
+
 }
