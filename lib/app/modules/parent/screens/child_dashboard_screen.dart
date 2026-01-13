@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:myapp/app/models/child_model.dart';
+import 'package:myapp/app/models/behavior_model.dart';
 import 'package:myapp/app/routes/app_pages.dart';
 import 'package:myapp/app/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-class ParentDashboardScreen extends StatelessWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class ChildDashboardScreen extends StatelessWidget {
+  final String childId;
+
+  ChildDashboardScreen({required this.childId});
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -17,7 +19,7 @@ class ParentDashboardScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Text('Child Dashboard'),
         actions: [
           IconButton(
             icon: Icon(themeProvider.themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode),
@@ -29,76 +31,57 @@ class ParentDashboardScreen extends StatelessWidget {
             onPressed: () => themeProvider.setSystemTheme(),
             tooltip: 'Set System Theme',
           ),
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              await _auth.signOut();
-              Get.offAllNamed(Routes.LOGIN);
-            },
-          ),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
-            .collection('users')
-            .doc(_auth.currentUser!.uid)
             .collection('children')
+            .doc(childId)
+            .collection('behaviors')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           }
 
-          final children = snapshot.data!.docs
-              .map((doc) => Child(
+          final behaviors = snapshot.data!.docs
+              .map((doc) => Behavior(
                     id: doc.id,
                     name: doc['name'],
-                    age: doc['age'],
+                    description: doc['description'],
                   ))
               .toList();
 
-          return GridView.builder(
+          return ListView.builder(
             padding: const EdgeInsets.all(16.0),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16.0,
-              mainAxisSpacing: 16.0,
-              childAspectRatio: 0.8,
-            ),
-            itemCount: children.length,
+            itemCount: behaviors.length,
             itemBuilder: (context, index) {
-              final child = children[index];
-              return _buildChildCard(context, child);
+              final behavior = behaviors[index];
+              return _buildBehaviorCard(context, behavior);
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.ADD_CHILD),
+        onPressed: () => Get.toNamed(Routes.ADD_BEHAVIOR, parameters: {'childId': childId}),
         child: Icon(Icons.add),
-        tooltip: 'Add Child',
+        tooltip: 'Add Behavior',
       ),
     );
   }
 
-  Widget _buildChildCard(BuildContext context, Child child) {
+  Widget _buildBehaviorCard(BuildContext context, Behavior behavior) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.CHILD_DASHBOARD, parameters: {'childId': child.id}),
+      onTap: () => Get.toNamed(Routes.BEHAVIOR_DETAILS, parameters: {'childId': childId, 'behaviorId': behavior.id}),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 40,
-              child: Text(child.name[0], style: TextStyle(fontSize: 24)),
-            ),
-            SizedBox(height: 16),
-            Text(child.name, style: Theme.of(context).textTheme.titleLarge),
-            SizedBox(height: 8),
-            Text('${child.age} years old', style: Theme.of(context).textTheme.bodyMedium),
-          ],
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(16.0),
+          title: Text(behavior.name, style: Theme.of(context).textTheme.titleLarge),
+          subtitle: Text(behavior.description, style: Theme.of(context).textTheme.bodyMedium),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
       ),
     );
