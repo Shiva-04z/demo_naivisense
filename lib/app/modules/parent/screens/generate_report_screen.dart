@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fl_chart/fl_chart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myapp/app/models/behavior_instance_model.dart';
 
@@ -75,23 +75,21 @@ class _GenerateReportScreenState extends State<GenerateReportScreen> {
                         ))
                     .toList();
 
-                final data = _createChartData(instances);
-
-                final series = [
-                  charts.Series<
-                      BehaviorChartData, DateTime>(
-                    id: 'Instances',
-                    domainFn: (BehaviorChartData data, _) => data.date,
-                    measureFn: (BehaviorChartData data, _) => data.count,
-                    data: data,
-                  ),
-                ];
+                final spots = _createChartData(instances);
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: charts.TimeSeriesChart(
-                    series,
-                    animate: true,
+                  child: LineChart(
+                    LineChartData(
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: spots,
+                          isCurved: true,
+                          barWidth: 3,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -99,7 +97,7 @@ class _GenerateReportScreenState extends State<GenerateReportScreen> {
     );
   }
 
-  List<BehaviorChartData> _createChartData(List<BehaviorInstance> instances) {
+  List<FlSpot> _createChartData(List<BehaviorInstance> instances) {
     final Map<DateTime, int> counts = {};
     for (final instance in instances) {
       final date = DateTime(instance.timestamp.year, instance.timestamp.month, instance.timestamp.day);
@@ -107,14 +105,7 @@ class _GenerateReportScreenState extends State<GenerateReportScreen> {
     }
 
     return counts.entries
-        .map((entry) => BehaviorChartData(entry.key, entry.value))
+        .map((entry) => FlSpot(entry.key.millisecondsSinceEpoch.toDouble(), entry.value.toDouble()))
         .toList();
   }
-}
-
-class BehaviorChartData {
-  final DateTime date;
-  final int count;
-
-  BehaviorChartData(this.date, this.count);
 }
