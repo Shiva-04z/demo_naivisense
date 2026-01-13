@@ -25,56 +25,19 @@ class BuildSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 280,
-      collapsedHeight: 120,
+
       floating: false,
       pinned: true,
       centerTitle: false,
-      leading: Builder(
-        builder: (context) => Container(
-          margin: const EdgeInsets.only(left: 16),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: accentGradient,
-            boxShadow: [
-              BoxShadow(
-                color: darkTeal.withOpacity(0.2),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Iconsax.menu_1,
-              color: darkTeal,
-              size: 24,
-            ),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-      ),
+      leading: DrawerButton(color: Colors.white,),
       actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 8),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: accentGradient,
-            boxShadow: [
-              BoxShadow(
-                color: darkTeal.withOpacity(0.2),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
+        IconButton(
+          icon: const Icon(
+            Iconsax.notification,
+            color: Colors.white,
+            size: 22,
           ),
-          child: IconButton(
-            icon: const Icon(
-              Iconsax.notification,
-              color: darkTeal,
-              size: 22,
-            ),
-            onPressed: () {},
-          ),
+          onPressed: () {},
         ),
         Padding(
           padding: const EdgeInsets.only(right: 16),
@@ -113,18 +76,15 @@ class BuildSliverAppBar extends StatelessWidget {
           letterSpacing: 0.5,
         ),
       ),
-      backgroundColor: primaryTeal,
+      backgroundColor: Colors.teal.shade900,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                darkTeal,
-                primaryTeal,
-                accentTeal.withOpacity(0.8),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+              stops: [0.0, 0.7],
             ),
           ),
           child: Padding(

@@ -5,5 +5,8 @@ class RoutesConstant {
   static String parentDashboard = "/parent_dashboard_view";
   static String therapistDashboard  = "/therapist_dashboard_view";
   static String therapycenterDashboard = "/therapycenter_dashboard_view";
+  static String schedulePage = "/schedule_page_view";
+  static String taskPage = "/task_page_view";
+  static String settingsPage = "/setting_page_view";
 
 }

@@ -378,7 +378,7 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
                     isVisible: true,
                     shape: DataMarkerType.circle,
                     borderWidth: 2,
-                    borderColor: Colors.white,
+                    borderColor: Colors.teal
                   ),
                   dataLabelSettings: DataLabelSettings(
                     isVisible: true,

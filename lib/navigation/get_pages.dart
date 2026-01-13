@@ -5,8 +5,14 @@ import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_
 import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_dashboard_view.dart';
 import 'package:myapp/features/home_page/home_page_bindings.dart';
 import 'package:myapp/features/login_page/login_page_binidngs.dart';
+import 'package:myapp/features/schedule/schedule_page_bindings.dart';
+import 'package:myapp/features/schedule/schedule_page_view.dart';
+import 'package:myapp/features/settings_page/settings_page_bindings.dart';
+import 'package:myapp/features/settings_page/settings_page_view.dart';
 import 'package:myapp/features/splash_page/splash_page_binidngs.dart';
 import 'package:myapp/features/splash_page/splash_page_view.dart';
+import 'package:myapp/features/tasks_page/task_page_bindings.dart';
+import 'package:myapp/features/tasks_page/tasks_page_view.dart';
 import 'package:myapp/navigation/routes_constant.dart';
 
 import '../features/dashboards/parent_dashboard/parent_dashboard_bindings.dart';
@@ -21,4 +27,7 @@ GetPage(name:RoutesConstant.homePage, page: ()=>HomePageView(),binding: HomePage
 GetPage(name:RoutesConstant.parentDashboard, page: ()=>ParentDashboardView(),binding: ParentDashboardBindings()),
 GetPage(name:RoutesConstant.therapistDashboard, page: ()=>TherapistDashboardView(),binding: TherapistDashboardBinding()),
 GetPage(name:RoutesConstant.therapycenterDashboard, page: ()=>TherapycenterDashboardView(),binding: TherapycenterDashboardBinding()),
+GetPage(name:RoutesConstant.schedulePage, page: ()=>SchedulePageView(),binding: SchedulePageBindings()),
+GetPage(name:RoutesConstant.taskPage, page: ()=>TasksPageView(),binding: TaskPageBindings()),
+GetPage(name:RoutesConstant.settingsPage, page: ()=>SettingsPageView(),binding: SettingsPageBindings()),
 ];

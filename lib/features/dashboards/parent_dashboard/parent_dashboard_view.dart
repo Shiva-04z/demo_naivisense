@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:myapp/features/dashboards/parent_dashboard/parent_dashboard_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'parent_dashboard_controller.dart';
@@ -48,7 +49,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
               centerTitle: true,
               background: Container(
                 decoration: BoxDecoration(
-                  gradient: primaryGradient,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+                    stops: [0.0, 0.7],
+                  ),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -64,7 +70,17 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
                 ),
               ),
             ),
-            backgroundColor: primaryTeal,
+            leading: Container(
+              margin: const EdgeInsets.all(8),
+              child: IconButton(
+                icon: Icon(
+                  Iconsax.arrow_left_2,
+                  color: Colors.white,
+                ),
+                onPressed: () => Get.back(),
+              ),
+            ),
+            backgroundColor: Colors.teal.shade900,
             elevation: 0,
             shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -72,20 +88,6 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
                 bottomRight: Radius.circular(40),
               ),
             ),
-            actions: [
-              Container(
-                margin: EdgeInsets.only(right: 16),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: accentGradient,
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.download, color: darkTeal),
-                  onPressed: _downloadTimeline,
-                  tooltip: 'Download Timeline',
-                ),
-              ),
-            ],
           ),
 
           // Main Content
@@ -125,10 +127,8 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  darkTeal,
-                  primaryTeal,
-                ],
+                colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+                stops: [0.0, 0.7],
               ),
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
@@ -910,7 +910,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
           ),
           Container(
             decoration: BoxDecoration(
-              gradient: primaryGradient,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+                stops: [0.0, 0.7],
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
             child: ElevatedButton(
@@ -985,7 +990,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: primaryGradient,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+          stops: [0.0, 0.7],
+        ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -1111,7 +1121,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
           padding: EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
             gradient: controller.currentPageIndex.value == index
-                ? primaryGradient
+                ? LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+              stops: [0.0, 0.7],
+            )
                 : null,
             borderRadius: BorderRadius.circular(12),
           ),
@@ -1297,7 +1312,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  gradient: primaryGradient,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+                    stops: [0.0, 0.7],
+                  ),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -1538,7 +1558,12 @@ class ParentDashboardView extends GetView<ParentDashboardController> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  gradient: primaryGradient,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+                    stops: [0.0, 0.7],
+                  ),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: TextButton(

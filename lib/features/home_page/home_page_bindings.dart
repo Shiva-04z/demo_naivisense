@@ -6,5 +6,6 @@ class HomePageBindings extends Bindings{
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut(()=>HomePageController());
+
   }
 }
