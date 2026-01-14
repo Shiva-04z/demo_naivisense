@@ -22,7 +22,7 @@ class TaskPageController extends GetxController {
       id: '2',
       title: 'Session Notes Update',
       description: 'Update therapy notes after last session',
-      assigner: 'Therapy Center',
+      assigner: 'Center',
       assignee: 'Me',
       dueDate: DateTime.now().add(const Duration(days: 2)),
       priority: Priority.medium,

@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
+import 'package:myapp/features/community_page/community_page_bindings.dart';
+import 'package:myapp/features/community_page/community_page_view.dart';
 import 'package:myapp/features/dashboards/therapist_dashboard/therapist_dashboard_binding.dart';
 import 'package:myapp/features/dashboards/therapist_dashboard/therapist_dashboard_view.dart';
 import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_dashboard_binding.dart';
 import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_dashboard_view.dart';
 import 'package:myapp/features/home_page/home_page_bindings.dart';
 import 'package:myapp/features/login_page/login_page_binidngs.dart';
+import 'package:myapp/features/profile_views/patient_profile_binidngs.dart';
+import 'package:myapp/features/profile_views/patient_profile_view.dart';
 import 'package:myapp/features/schedule/schedule_page_bindings.dart';
 import 'package:myapp/features/schedule/schedule_page_view.dart';
 import 'package:myapp/features/settings_page/settings_page_bindings.dart';
@@ -13,12 +17,14 @@ import 'package:myapp/features/splash_page/splash_page_binidngs.dart';
 import 'package:myapp/features/splash_page/splash_page_view.dart';
 import 'package:myapp/features/tasks_page/task_page_bindings.dart';
 import 'package:myapp/features/tasks_page/tasks_page_view.dart';
+import 'package:myapp/features/therapist_profile/therapist_profile_bindings.dart';
 import 'package:myapp/navigation/routes_constant.dart';
 
 import '../features/dashboards/parent_dashboard/parent_dashboard_bindings.dart';
 import '../features/dashboards/parent_dashboard/parent_dashboard_view.dart';
 import '../features/home_page/home_page_view.dart';
 import '../features/login_page/login_page_view.dart';
+import '../features/therapist_profile/therapist_profile_view.dart';
 
 List<GetPage> getPages =[
 GetPage(name:RoutesConstant.splashPage, page: ()=>SplashPageView(),binding: SplashPageBinidngs()),
@@ -30,4 +36,7 @@ GetPage(name:RoutesConstant.therapycenterDashboard, page: ()=>TherapycenterDashb
 GetPage(name:RoutesConstant.schedulePage, page: ()=>SchedulePageView(),binding: SchedulePageBindings()),
 GetPage(name:RoutesConstant.taskPage, page: ()=>TasksPageView(),binding: TaskPageBindings()),
 GetPage(name:RoutesConstant.settingsPage, page: ()=>SettingsPageView(),binding: SettingsPageBindings()),
+GetPage(name:RoutesConstant.communityPage, page: ()=>CommunityPageView(),binding: CommunityPageBindings()),
+GetPage(name:RoutesConstant.patientProfile, page: ()=>PatientProfileView(),binding: PatientProfileBinidngs()),
+GetPage(name:RoutesConstant.therapistProfile, page: ()=>TherapistProfileView(),binding: TherapistProfileBindings()),
 ];

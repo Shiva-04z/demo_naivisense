@@ -243,7 +243,9 @@ class HomePageView extends GetView<HomePageController> {
                             icon: Iconsax.people,
                             title: "Healing Circle",
                             subtitle: "Premium Community Access",
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(RoutesConstant.communityPage);
+                            },
                           ),
                           _buildLuxuryMenuItem(
                             icon: Iconsax.task_square,

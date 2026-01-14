@@ -8,5 +8,9 @@ class RoutesConstant {
   static String schedulePage = "/schedule_page_view";
   static String taskPage = "/task_page_view";
   static String settingsPage = "/setting_page_view";
+  static String communityPage = "/community_page_view";
+  static String patientProfile = "/patient_profile_view";
+  static String therapistProfile = "/therapist_profile_view";
+  static String centerProfile = "/center_profile_view";
 
 }
