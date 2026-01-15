@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'therapist_dashboard_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-// Note: For Iconsax, you'd need to add the iconsax package to pubspec.yaml
-// import 'package:iconsax/iconsax.dart';
+
 
 class TherapistDashboardView extends GetView<TherapistDashboardController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         backgroundColor: Color(0xFFF8FAFC),
         appBar: AppBar(
@@ -23,7 +23,19 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
               fontSize: 20,
             ),
           ),
-          backgroundColor: Color(0xFF0D9488), // Modern teal
+          leading: Container(
+            margin: const EdgeInsets.all(8),
+
+
+            child: IconButton(
+              icon: Icon(
+                Iconsax.arrow_left_2,
+                color: Colors.white,
+              ),
+              onPressed: () => Get.back(),
+            ),
+          ),
+          backgroundColor: Colors.teal.shade900, // Modern teal
           centerTitle: true,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -34,6 +46,7 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
           bottom: TabBar(
             labelStyle: GoogleFonts.inter(fontWeight: FontWeight.w500),
             unselectedLabelStyle: GoogleFonts.inter(),
+            indicatorSize: TabBarIndicatorSize.tab,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white.withOpacity(0.7),
             indicator: UnderlineTabIndicator(
@@ -42,7 +55,6 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
             ),
             tabs: [
               Tab(text: 'Overview'),
-              Tab(text: 'Schedule'),
               Tab(text: 'AI Persona'),
             ],
           ),
@@ -50,7 +62,6 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
         body: TabBarView(
           children: [
             _buildOverviewTab(),
-            _buildScheduleTab(),
             _buildAIPersonaTab(),
           ],
         ),
@@ -94,7 +105,8 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF0D9488), Color(0xFF14B8A6)],
+          colors: [Color(0xFF004D4D), Color(0xFF002D2D)],
+          stops: [0.0, 0.7],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -666,119 +678,9 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
     );
   }
 
-  Widget _buildScheduleTab() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          // Weekly session chart
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.05),
-                    blurRadius: 20,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.1),
-                  width: 1,
-                ),
-              ),
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Weekly Sessions',
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF1E293B),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Expanded(
-                    child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(
-                        labelStyle: GoogleFonts.inter(fontSize: 12),
-                      ),
-                      primaryYAxis: NumericAxis(
-                        labelStyle: GoogleFonts.inter(fontSize: 12),
-                      ),
-                      palette: [Color(0xFF0D9488)],
-                      series: <ColumnSeries<ChartData, String>>[
-                        ColumnSeries<ChartData, String>(
-                          dataSource: controller.sessionData,
-                          xValueMapper: (ChartData data, _) => data.week,
-                          yValueMapper: (ChartData data, _) => data.progress,
-                          dataLabelSettings: DataLabelSettings(
-                            isVisible: true,
-                            textStyle: GoogleFonts.inter(fontSize: 10),
-                          ),
-                          animationDuration: 1500,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
 
-          // Calendar
-          Expanded(
-            flex: 3,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.05),
-                    blurRadius: 20,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.1),
-                  width: 1,
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: SfCalendar(
-                  view: CalendarView.week,
-                  dataSource: _getCalendarDataSource(),
-                  monthViewSettings: MonthViewSettings(
-                    showAgenda: true,
-                    appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-                  ),
-                  todayHighlightColor: Color(0xFF0D9488),
-                  selectionDecoration: BoxDecoration(
-                    color: Color(0xFF0D9488).withOpacity(0.1),
-                    border: Border.all(color: Color(0xFF0D9488)),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  cellBorderColor: Colors.grey[200],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  _DataSource _getCalendarDataSource() {
-    return _DataSource(controller.appointments);
-  }
+
 
   Widget _buildAIPersonaTab() {
     return DefaultTabController(
@@ -799,6 +701,7 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
               unselectedLabelStyle: GoogleFonts.inter(),
               labelColor: Colors.white,
               unselectedLabelColor: Colors.grey[600],
+              indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Color(0xFF0D9488),

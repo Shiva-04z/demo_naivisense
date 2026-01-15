@@ -247,6 +247,39 @@ class HomePageView extends GetView<HomePageController> {
                               Get.toNamed(RoutesConstant.communityPage);
                             },
                           ),
+                          if (glbv.role == 'therapist')...{
+                            _buildLuxuryMenuItem(
+                              icon: Iconsax.hospital,
+                              title: "Patients",
+                              subtitle: "List All the Patients",
+                              onTap: () {
+                                Get.toNamed(RoutesConstant.patientsPage);
+                              },
+                            ),_buildLuxuryMenuItem(
+                              icon: Iconsax.briefcase,
+                              title: "Jobs",
+                              subtitle: "View All Job Postings",
+                              onTap: () {
+                                Get.toNamed(RoutesConstant.communityPage);
+                              },
+                            ),
+                          } else if(glbv.role !='patient')...{
+                            _buildLuxuryMenuItem(
+                              icon: Iconsax.hospital,
+                              title: "Therapists",
+                              subtitle: "List All the therapists, patients",
+                              onTap: () {
+                                Get.toNamed(RoutesConstant.therapistPage);
+                              },
+                            ),_buildLuxuryMenuItem(
+                              icon: Iconsax.briefcase,
+                              title: "Jobs",
+                              subtitle: "Post a new job",
+                              onTap: () {
+                                Get.toNamed(RoutesConstant.communityPage);
+                              },
+                            ),
+                          },
                           _buildLuxuryMenuItem(
                             icon: Iconsax.task_square,
                             title: "Tasks",
@@ -604,7 +637,7 @@ class HomePageView extends GetView<HomePageController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Good Morning,",
+                            "Hola!, ${glbv.role.replaceAll('_', ' ').toUpperCase()}",
                             style: GoogleFonts.poppins(
                               color: luxuryGray.withOpacity(0.7),
                               fontSize: 14,
@@ -670,7 +703,7 @@ class HomePageView extends GetView<HomePageController> {
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
-                                  "Daily Progress",
+                                  "Daily Schedule",
                                   style: GoogleFonts.poppins(
                                     color: darkTeal,
                                     fontSize: 16,
@@ -681,7 +714,7 @@ class HomePageView extends GetView<HomePageController> {
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              "Complete your daily wellness exercises to unlock premium insights",
+                              "See your today's work schedule",
                               style: GoogleFonts.poppins(
                                 color: luxuryGray.withOpacity(0.7),
                                 fontSize: 13,
@@ -704,10 +737,13 @@ class HomePageView extends GetView<HomePageController> {
                             ),
                           ],
                         ),
-                        child: const Icon(
-                          Iconsax.arrow_right_3,
-                          color: Colors.white,
-                          size: 24,
+                        child: InkWell(
+                          onTap: (){Get.toNamed(RoutesConstant.schedulePage);},
+                          child: const Icon(
+                            Iconsax.arrow_right_3,
+                            color: Colors.white,
+                            size: 24,
+                          ),
                         ),
                       ),
                     ],

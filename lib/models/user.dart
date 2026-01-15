@@ -15,6 +15,7 @@ class UserProfile {
   int? therapists;
   final bool isVerified;
   bool isFollowing;
+  bool isOnline;
   final String? bio;
   final ContactInfo? contactInfo;
 
@@ -31,11 +32,12 @@ class UserProfile {
     this.therapists,
     this.isVerified = false,
     this.isFollowing = false,
+    this.isOnline =false,
     this.bio,
     this.contactInfo,
   });
 
-  UserProfile? copyWith({ bool? isFollowing,  int? followers,int? experience }) {
+  UserProfile? copyWith({ bool? isFollowing,  int? followers,int? experience,bool? isOnline }) {
     return UserProfile(
       id: id,
       role: role,
@@ -45,6 +47,7 @@ class UserProfile {
       followers: followers?? this.followers,
       isFollowing: isFollowing?? this.isFollowing,
       experience: experience?? this.experience,
+      isOnline: isOnline?? this.isOnline,
       isVerified: isVerified,
       location: location,
       patients: patients,

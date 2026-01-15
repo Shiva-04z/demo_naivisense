@@ -14,5 +14,8 @@ class RoutesConstant {
   static String centerProfile = "/center_profile_view";
   static String conversationPage = "/conversation_page_view";
   static String messagesPage = "/message_page_view";
-
+  static String patientsPage = "/patients_page_view";
+  static String therapistPage = "/therapist_page_view";
+  static String myJobs= "/my_jobs_view";
+  static String jobPost = "/job_post_view";
 }

@@ -11,6 +11,8 @@ import 'package:myapp/features/home_page/home_page_bindings.dart';
 import 'package:myapp/features/login_page/login_page_binidngs.dart';
 import 'package:myapp/features/message_page/message_page_bindings.dart';
 import 'package:myapp/features/message_page/message_page_view.dart';
+import 'package:myapp/features/patients_page/patients_page_bindings.dart';
+import 'package:myapp/features/patients_page/patients_page_view.dart';
 import 'package:myapp/features/profile_views/patient_profile_binidngs.dart';
 import 'package:myapp/features/profile_views/patient_profile_view.dart';
 import 'package:myapp/features/schedule/schedule_page_bindings.dart';
@@ -21,6 +23,8 @@ import 'package:myapp/features/splash_page/splash_page_binidngs.dart';
 import 'package:myapp/features/splash_page/splash_page_view.dart';
 import 'package:myapp/features/tasks_page/task_page_bindings.dart';
 import 'package:myapp/features/tasks_page/tasks_page_view.dart';
+import 'package:myapp/features/therapist_page/therapist_page_bindings.dart';
+import 'package:myapp/features/therapist_page/therapists_page_view.dart';
 import 'package:myapp/features/therapist_profile/therapist_profile_bindings.dart';
 import 'package:myapp/features/therapycenter_profile/therapycenter_profile_bindings.dart';
 import 'package:myapp/features/therapycenter_profile/therapycenter_profile_view.dart';
@@ -48,4 +52,6 @@ GetPage(name:RoutesConstant.therapistProfile, page: ()=>TherapistProfileView(),b
 GetPage(name:RoutesConstant.centerProfile, page: ()=>TherapycenterProfileView(),binding: TherapycenterProfileBindings()),
 GetPage(name:RoutesConstant.conversationPage, page: ()=>ConversationsPageView(),binding: ConversationsPageBinindgs()),
 GetPage(name:RoutesConstant.messagesPage, page: ()=>MessageDetailView(),binding: MessagePageBindings()),
+GetPage(name:RoutesConstant.patientsPage, page: ()=>PatientsPageView(),binding: PatientsPageBindings()),
+GetPage(name:RoutesConstant.therapistPage, page: ()=>TherapistPageView(),binding: TherapistPageBindings()),
 ];

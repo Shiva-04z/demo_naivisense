@@ -143,7 +143,7 @@ class BuildSliverAppBar extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      glbv.role.toUpperCase(),
+                      glbv.role=="therapy_center"?"CENTER ADMIN":glbv.role,
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 38,

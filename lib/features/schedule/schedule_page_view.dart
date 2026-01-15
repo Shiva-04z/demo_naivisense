@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:myapp/features/schedule/schedule_page_controller.dart';
@@ -15,9 +16,9 @@ class SchedulePageView extends GetView<SchedulePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.white,
-      body: CustomScrollView(
+      body:Obx(()=> (controller.isLoading.value)?LoadingAnimationWidget.hexagonDots(color: Colors.teal, size: 32): CustomScrollView(
         slivers: [
           // App Bar with Gradient
           SliverAppBar(
@@ -90,13 +91,6 @@ class SchedulePageView extends GetView<SchedulePageController> {
                 onPressed: () => Get.back(),
               ),
             ),
-            actions: [
-              // Role selector
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Obx(() => _buildRoleSelector()),
-              ),
-            ],
           ),
 
           // Content
@@ -122,7 +116,7 @@ class SchedulePageView extends GetView<SchedulePageController> {
             ),
           ),
         ],
-      ),
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddEventDialog,
         backgroundColor: const Color(0xFF0D9488),
@@ -138,74 +132,7 @@ class SchedulePageView extends GetView<SchedulePageController> {
     );
   }
 
-  Widget _buildRoleSelector() {
-    return PopupMenuButton<String>(
-      icon: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              _getRoleIcon(),
-              color: Colors.white,
-              size: 16,
-            ),
-            const SizedBox(width: 6),
-            Obx(() => Text(
-              controller.userRole.value.replaceAll('_', ' ').toTitleCase(),
-              style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            )),
-            const SizedBox(width: 4),
-            const Icon(
-              Iconsax.arrow_down_1,
-              color: Colors.white,
-              size: 12,
-            ),
-          ],
-        ),
-      ),
-      onSelected: (value) => controller.changeUserRole(value),
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 'patient',
-          child: Row(
-            children: [
-              const Icon(Iconsax.user, color: Color(0xFF0D9488)),
-              const SizedBox(width: 8),
-              Text('Patient', style: GoogleFonts.inter()),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 'therapist',
-          child: Row(
-            children: [
-              const Icon(Iconsax.health, color: Color(0xFF0D9488)),
-              const SizedBox(width: 8),
-              Text('Therapist', style: GoogleFonts.inter()),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 'therapy_center',
-          child: Row(
-            children: [
-              const Icon(Iconsax.buildings, color: Color(0xFF0D9488)),
-              const SizedBox(width: 8),
-              Text('Therapy Center', style: GoogleFonts.inter()),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+
 
   Widget _buildUpcomingEventsSection() {
     return Column(
