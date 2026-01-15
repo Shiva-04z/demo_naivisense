@@ -1,11 +1,182 @@
 import 'package:flutter/material.dart';
 
+import '../../models/conversation.dart';
 import '../../models/post.dart';
 import '../../models/user.dart';
 
 // Dummy data generation
 class DummyData {
   // Helper lists for generating random data
+  // In your DummyData class, add a method to get current user
+  static UserProfile getCurrentUser() {
+    return UserProfile(
+      id: 'current_user',
+      name: 'You',
+      role: 'patient', // or whatever your role is
+      specialization: 'General Mental Health',
+      location: 'New York',
+      followers: 150,
+      posts: 25,
+      isVerified: true,
+      isFollowing: false,
+      bio: 'Working on personal growth and mental wellness.',
+    );
+  }
+
+// Update the getMessagesForConversation method to include your messages
+  static MessageList getMessagesForConversation(String conversationId) {
+    List<Message> messages = [];
+    final conversation = getConversationById(conversationId);
+    final currentUser = getCurrentUser();
+
+    if (conversation != null) {
+      final participants = conversation.participants;
+      final now = DateTime.now();
+
+      // Add current user to participants if not already there
+      if (!participants.any((user) => user.id == 'current_user')) {
+        participants.add(currentUser);
+      }
+
+      for (int i = 0; i < 15; i++) {
+        final senderIndex = i % participants.length;
+        final sender = participants[senderIndex];
+        final hoursAgo = (15 - i) * 2;
+
+        // Alternate between user and other participant for more realistic conversation
+        final isCurrentUserMessage = i % 2 == 0 || (i % 3 == 0 && i > 5);
+
+        final senderId = isCurrentUserMessage ? 'current_user' : participants.firstWhere(
+              (p) => p.id != 'current_user',
+          orElse: () => participants[0],
+        ).id;
+
+        final senderName = isCurrentUserMessage ? 'You' : participants.firstWhere(
+              (p) => p.id != 'current_user',
+          orElse: () => participants[0],
+        ).name;
+
+        messages.add(Message(
+          id: 'msg_${conversationId}_$i',
+          conversationId: conversationId,
+          senderId: senderId,
+          senderName: senderName,
+          content: conversationMessages[(i + 5) % conversationMessages.length],
+          timestamp: now.subtract(Duration(hours: hoursAgo)),
+          isRead: i < 12,
+          type: i % 4 == 0 ? MessageType.image :
+          i % 5 == 0 ? MessageType.document :
+          MessageType.text,
+          isSent: true,
+          isDelivered: true,
+        ));
+      }
+    }
+
+    return MessageList(
+      conversationId: conversationId,
+      messages: messages.reversed.toList(), // Most recent last
+    );
+  }
+
+  // Add to DummyData class (at the end before closing brace)
+
+// Conversation related data
+  static final List<String> conversationMessages = [
+    'Hello, how are you feeling today?',
+    'I\'m doing better, thank you for asking.',
+    'That\'s great to hear! Remember to practice the breathing exercises we discussed.',
+    'I have been, they really help with my anxiety.',
+    'Excellent! Consistency is key. Any specific concerns this week?',
+    'I\'ve been having trouble sleeping again.',
+    'Let\'s schedule a session to discuss sleep strategies. How about Friday?',
+    'Friday works for me. What time?',
+    'How does 2 PM sound?',
+    'Perfect, I\'ll see you then.',
+    'Don\'t forget to fill out your mood tracker this week.',
+    'I\'ve been keeping up with it daily.',
+    'Great progress! Your commitment is showing results.',
+    'Thank you for your support, I really appreciate it.',
+    'You\'re doing amazing work. Keep it up!',
+    'I have a question about the meditation technique...',
+    'Feel free to ask anything, I\'m here to help.',
+    'The group session was really helpful last week.',
+    'I\'m glad you found it beneficial. We\'ll have another one next month.',
+    'Looking forward to it!'
+  ];
+
+  static final List<String> conversationTopics = [
+    'General Check-in',
+    'Anxiety Management',
+    'Sleep Issues',
+    'Progress Review',
+    'Treatment Plan Update',
+    'Medication Discussion',
+    'Coping Strategies',
+    'Emergency Support',
+    'Session Scheduling',
+    'Resource Sharing'
+  ];
+
+// Generate conversations
+  static List<Conversation> getConversations() {
+    List<Conversation> conversations = [];
+    List<UserProfile> allUsers = getAllUsers();
+
+    for (int i = 0; i < 15; i++) {
+      UserProfile user1 = allUsers[i];
+      UserProfile user2 = allUsers[(i + 5) % allUsers.length];
+
+      // Ensure users are different
+      if (user1.id == user2.id) {
+        user2 = allUsers[(i + 10) % allUsers.length];
+      }
+
+      // Generate random last message time
+      final hoursAgo = (i * 3) % 72; // 0 to 71 hours ago
+      final String lastSeen;
+      if (hoursAgo < 1) {
+        lastSeen = 'Just now';
+      } else if (hoursAgo < 24) {
+        lastSeen = '$hoursAgo h ago';
+      } else {
+        lastSeen = '${hoursAgo ~/ 24} d ago';
+      }
+
+      // Generate random unread count
+      final unreadCount = i % 5;
+
+      conversations.add(Conversation(
+        id: 'conversation_${i + 1}',
+        participantIds: [user1.id, user2.id],
+        participants: [user1, user2],
+        lastMessage: conversationMessages[i % conversationMessages.length],
+        lastMessageTime: lastSeen,
+        unreadCount: unreadCount,
+        isPinned: i % 4 == 0,
+        topic: conversationTopics[i % conversationTopics.length],
+        isGroup: i % 6 == 0,
+      ));
+    }
+
+    return conversations;
+  }
+
+// Get conversations for a specific user
+  static List<Conversation> getConversationsForUser(String userId) {
+    return getConversations().where((conv) =>
+        conv.participantIds.contains(userId)
+    ).toList();
+  }
+
+// Get conversation by ID
+  static Conversation? getConversationById(String id) {
+    return getConversations().firstWhere((conv) => conv.id == id);
+  }
+
+
+
+
   static final List<String> therapistSpecializations = [
     'Clinical Psychology',
     'Cognitive Behavioral Therapy',

@@ -142,7 +142,7 @@ class PatientProfileView extends GetView<PatientProfileController> {
                 controller: controller.tabController,
                 children: [
                   _buildOverviewTab(),
-                  _buildPostsTab(),
+                  // _buildPostsTab(),
                   _buildTimelineTab(),
                 ],
               ),
@@ -304,11 +304,11 @@ class PatientProfileView extends GetView<PatientProfileController> {
                         label: 'Followers',
                         icon: Iconsax.people,
                       ),
-                      _buildStatItem(
-                        value: '${controller.userProfile?.posts ?? 0}',
-                        label: 'Posts',
-                        icon: Iconsax.document,
-                      ),
+                      // _buildStatItem(
+                      //   value: '${controller.userProfile?.posts ?? 0}',
+                      //   label: 'Posts',
+                      //   icon: Iconsax.document,
+                      // ),
                       _buildStatItem(
                         value: '85%',
                         label: 'Progress',
@@ -1259,10 +1259,10 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
             icon: Icon(Iconsax.profile_circle, size: 20),
             text: 'Overview',
           ),
-          Tab(
-            icon: Icon(Iconsax.document, size: 20),
-            text: 'Posts',
-          ),
+          // Tab(
+          //   icon: Icon(Iconsax.document, size: 20),
+          //   text: 'Posts',
+          // ),
           Tab(
             icon: Icon(Iconsax.calendar, size: 20),
             text: 'Timeline',

@@ -45,7 +45,7 @@ class HomePageView extends GetView<HomePageController> {
       backgroundColor: premiumWhite,
       body: _buildBody(),
       drawer: _buildLuxuryDrawer(),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: (glbv.role!='patient') ?FloatingActionButton.extended(
         onPressed: _showCreatePostDialog,
         backgroundColor: primaryTeal,
         foregroundColor: Colors.white,
@@ -72,7 +72,7 @@ class HomePageView extends GetView<HomePageController> {
             letterSpacing: 0.5,
           ),
         ),
-      ),
+      ): null,
     );
   }
 
@@ -260,7 +260,9 @@ class HomePageView extends GetView<HomePageController> {
                             title: "Conversation",
                             subtitle: "Secure Messaging",
                             badge: "3",
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(RoutesConstant.conversationPage);
+                            },
                           ),
                           _buildLuxuryMenuItem(
                             icon: Iconsax.calendar_2,

@@ -11,7 +11,7 @@ class PatientProfileController extends GetxController  with GetSingleTickerProvi
 
   void initTabs({required TickerProvider vsync}) {
     tabController = TabController(
-      length: 3,
+      length: 2,
       vsync: vsync ,
       initialIndex: selectedTabIndex,
     );

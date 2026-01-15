@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:myapp/features/tasks_page/task_page_controller.dart';
 
+import '../../core/globals/global_variables.dart' as glbv;
+
 class TasksPageView extends GetView<TaskPageController> {
   const TasksPageView({super.key});
 
@@ -65,6 +67,7 @@ class TasksPageView extends GetView<TaskPageController> {
     controller.selectedTabIndex.value == 0,
     )),
     ),
+    if(glbv.role!='patient')
     Expanded(
     child: Obx(() => _buildTabButton(
     'Assigned by Me',

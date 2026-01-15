@@ -94,7 +94,7 @@ class HomePageController extends GetxController{
         userId: '2',
         userName: 'John Smith',
         userProfile: 'JS',
-        userRole: 'patient',
+        userRole: 'therapist',
         contentText: 'Today marks 6 months of my physical therapy journey! From barely walking to completing my first 5k walk. Grateful for my amazing therapist and the supportive community here. Consistency truly is key! 💪 #recoveryjourney #nevergiveup',
         images: [
           'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop',
@@ -145,7 +145,7 @@ class HomePageController extends GetxController{
         userId: '5',
         userName: 'Emma Johnson',
         userProfile: 'EJ',
-        userRole: 'patient',
+        userRole: 'therapist',
         contentText: 'Sharing my weekly meal plan designed by my nutritionist. Focus on anti-inflammatory foods has made a noticeable difference in my joint pain management. Remember: "Let food be thy medicine" - Hippocrates',
         images: [
           'https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&auto=format&fit=crop',

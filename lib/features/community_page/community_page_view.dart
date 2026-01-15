@@ -1193,7 +1193,10 @@ class CommunityPageView extends GetView<CommunityPageController> {
                         }
                       else if(user.role =='therapist') {
                         Get.toNamed(RoutesConstant.therapistProfile);
-                      }
+                      }else
+                        {
+                          Get.toNamed(RoutesConstant.centerProfile);
+                        }
                     },
                    icon: Icon(Icons.visibility_sharp,color: Colors.white,),
                     label: Text(

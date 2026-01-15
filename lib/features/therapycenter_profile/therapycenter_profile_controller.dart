@@ -4,39 +4,37 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/models/user.dart';
 import '../../core/globals/dummy_data.dart';
 import '../../core/globals/global_variables.dart' as glbv;
+import '../../models/post.dart';
 
-class TherapistProfileController extends GetxController with GetTickerProviderStateMixin {
+class TherapycenterProfileController extends GetxController with GetSingleTickerProviderStateMixin {
   late String userId;
-  late TabController mainTabController;
-  late TabController journeyTabController;
+  late TabController tabController;
 
   void initTabs({required TickerProvider vsync}) {
-    mainTabController = TabController(
+    tabController = TabController(
       length: 3,
       vsync: vsync,
-      initialIndex: selectedMainTabIndex,
-    );
-
-    journeyTabController = TabController(
-      length: 2,
-      vsync: vsync,
+      initialIndex: selectedTabIndex,
     );
   }
 
   final Rx<UserProfile?> _userProfile = Rx<UserProfile?>(null);
   UserProfile? get userProfile => _userProfile.value;
 
-  final RxList<dynamic> _timelineEvents = RxList<dynamic>([]);
-  List<dynamic> get timelineEvents => _timelineEvents;
+  final RxList<Post> _posts = RxList<Post>([]);
+  List<Post> get posts => _posts;
 
   final RxList<dynamic> _certificates = RxList<dynamic>([]);
   List<dynamic> get certificates => _certificates;
 
-  final RxInt _selectedMainTabIndex = 0.obs;
-  int get selectedMainTabIndex => _selectedMainTabIndex.value;
+  final RxList<dynamic> _staffMembers = RxList<dynamic>([]);
+  List<dynamic> get staffMembers => _staffMembers;
 
-  final RxInt _selectedJourneyTabIndex = 0.obs;
-  int get selectedJourneyTabIndex => _selectedJourneyTabIndex.value;
+  final RxList<String> _services = RxList<String>([]);
+  List<String> get services => _services;
+
+  final RxInt _selectedTabIndex = 0.obs;
+  int get selectedTabIndex => _selectedTabIndex.value;
 
   final RxBool isLoading = true.obs;
 
@@ -45,10 +43,6 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
     super.onInit();
     initTabs(vsync: this);
     loadUserProfile();
-
-    journeyTabController.addListener(() {
-      _selectedJourneyTabIndex.value = journeyTabController.index;
-    });
   }
 
   void loadUserProfile() {
@@ -57,86 +51,102 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
     // Simulate API call delay
     Future.delayed(Duration(milliseconds: 500), () {
       _userProfile.value = DummyData.getUserById(userId);
-      _timelineEvents.value = DummyData.getTimelineEvents(userId);
+      _loadPosts();
       _loadCertificates();
+      _loadStaffMembers();
+      _loadServices();
       isLoading.value = false;
     });
   }
 
+  void _loadPosts() {
+    _posts.value = DummyData.getPostsForUser(userId);
+  }
+
   void _loadCertificates() {
-    // Generate dummy certificates
+    // Generate dummy certificates for therapy center
     _certificates.value = [
-      Certificate(
+      TherapyCenterCertificate(
         id: 'cert_1',
-        title: 'Clinical Psychology Certification',
-        issuingOrganization: 'American Psychological Association',
-        issueDate: DateTime.now().subtract(Duration(days: 365 * 2)),
-        expiryDate: DateTime.now().add(Duration(days: 365 * 3)),
-        credentialId: 'APA-CP-2022-12345',
-        icon: Icons.verified,
-        color: Colors.blue,
-      ),
-      Certificate(
-        id: 'cert_2',
-        title: 'Cognitive Behavioral Therapy Specialist',
-        issuingOrganization: 'International CBT Association',
+        title: 'JCI Accreditation',
+        issuingOrganization: 'Joint Commission International',
         issueDate: DateTime.now().subtract(Duration(days: 365)),
+        expiryDate: DateTime.now().add(Duration(days: 365 * 3)),
+        credentialId: 'JCI-ACC-2023-001',
+        icon: Icons.medical_services,
+        color: Colors.blue,
+        type: 'Accreditation',
+      ),
+      TherapyCenterCertificate(
+        id: 'cert_2',
+        title: 'Mental Health Facility License',
+        issuingOrganization: 'State Health Department',
+        issueDate: DateTime.now().subtract(Duration(days: 730)),
         expiryDate: DateTime.now().add(Duration(days: 365 * 2)),
-        credentialId: 'ICBTA-2023-67890',
-        icon: Icons.psychology,
-        color: Colors.teal,
+        credentialId: 'MHF-LIC-2022-456',
+        icon: Icons.verified,
+        color: Colors.green,
+        type: 'License',
       ),
-      Certificate(
+      TherapyCenterCertificate(
         id: 'cert_3',
-        title: 'Trauma-Informed Care Certification',
-        issuingOrganization: 'National Trauma Institute',
+        title: 'ISO 9001:2015 Certified',
+        issuingOrganization: 'International Standards Organization',
         issueDate: DateTime.now().subtract(Duration(days: 180)),
-        expiryDate: DateTime.now().add(Duration(days: 365 * 4)),
-        credentialId: 'NTI-TIC-2024-54321',
-        icon: Icons.healing,
-        color: Colors.purple,
-      ),
-      Certificate(
-        id: 'cert_4',
-        title: 'Licensed Clinical Social Worker',
-        issuingOrganization: 'State Licensing Board',
-        issueDate: DateTime.now().subtract(Duration(days: 365 * 3)),
-        expiryDate: null, // No expiry
-        credentialId: 'LCSW-789012',
-        icon: Icons.badge,
+        expiryDate: DateTime.now().add(Duration(days: 365 * 3)),
+        credentialId: 'ISO-9001-2024',
+        icon: Icons.star,
         color: Colors.orange,
+        type: 'Quality',
       ),
-      Certificate(
+      TherapyCenterCertificate(
+        id: 'cert_4',
+        title: 'HIPAA Compliance Certification',
+        issuingOrganization: 'Health & Human Services',
+        issueDate: DateTime.now().subtract(Duration(days: 90)),
+        expiryDate: DateTime.now().add(Duration(days: 365)),
+        credentialId: 'HIPAA-COMP-2024',
+        icon: Icons.security,
+        color: Colors.purple,
+        type: 'Compliance',
+      ),
+      TherapyCenterCertificate(
         id: 'cert_5',
-        title: 'Mindfulness-Based Stress Reduction',
-        issuingOrganization: 'Center for Mindfulness',
+        title: 'Patient Safety Excellence',
+        issuingOrganization: 'National Quality Forum',
         issueDate: DateTime.now().subtract(Duration(days: 120)),
         expiryDate: DateTime.now().add(Duration(days: 365 * 2)),
-        credentialId: 'MBSR-2024-00123',
-        icon: Icons.self_improvement,
-        color: Colors.green,
-      ),
-      Certificate(
-        id: 'cert_6',
-        title: 'EMDR Therapy Certification',
-        issuingOrganization: 'EMDR International Association',
-        issueDate: DateTime.now().subtract(Duration(days: 90)),
-        expiryDate: DateTime.now().add(Duration(days: 365 * 3)),
-        credentialId: 'EMDR-CERT-2024',
-        icon: Icons.psychology_alt,
-        color: Colors.indigo,
+        credentialId: 'PSE-2024-789',
+        icon: Icons.health_and_safety,
+        color: Colors.teal,
+        type: 'Award',
       ),
     ];
   }
 
-  void changeMainTab(int index) {
-    _selectedMainTabIndex.value = index;
-    mainTabController.animateTo(index);
+  void _loadStaffMembers() {
+    // Generate dummy staff members
+    _staffMembers.value = DummyData.getTherapists();
   }
 
-  void changeJourneyTab(int index) {
-    _selectedJourneyTabIndex.value = index;
-    journeyTabController.animateTo(index);
+  void _loadServices() {
+    _services.value = [
+      'Individual Therapy',
+      'Group Therapy Sessions',
+      'Family Counseling',
+      'Child & Adolescent Therapy',
+      'Trauma Recovery',
+      'Anxiety & Depression Treatment',
+      'Cognitive Behavioral Therapy',
+      'Art & Music Therapy',
+      'Online Counseling',
+      'Emergency Support',
+    ];
+  }
+
+  void changeTab(int index) {
+    _selectedTabIndex.value = index;
+    tabController.animateTo(index);
   }
 
   void toggleFollow() {
@@ -151,10 +161,10 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
     }
   }
 
-  void connectWithUser() {
+  void contactCenter() {
     Get.snackbar(
-      'Connection Request',
-      'Connection request sent to Dr. ${userProfile?.name}',
+      'Contact Request',
+      'Your message has been sent to ${userProfile?.name}',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.teal,
       colorText: Colors.white,
@@ -162,10 +172,13 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
   }
 
   void bookAppointment() {
-    Get.toNamed('/book-appointment', arguments: {'therapist': userProfile});
+    Get.toNamed('/book-appointment', arguments: {
+      'center': userProfile,
+      'type': 'center',
+    });
   }
 
-  void viewCertificateDetails(Certificate certificate) {
+  void viewCertificateDetails(TherapyCenterCertificate certificate) {
     Get.dialog(
       AlertDialog(
         backgroundColor: Colors.white,
@@ -200,6 +213,23 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: certificate.color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  certificate.type.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: certificate.color,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
               Text(
                 certificate.title,
                 style: TextStyle(
@@ -238,7 +268,7 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Verified Certificate',
+                            'Verified Accreditation',
                             style: TextStyle(
                               color: certificate.color,
                               fontWeight: FontWeight.w600,
@@ -246,7 +276,7 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'This certificate has been verified by our team',
+                            'This accreditation is recognized nationwide',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[600],
@@ -348,13 +378,12 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
 
   @override
   void onClose() {
-    mainTabController.dispose();
-    journeyTabController.dispose();
+    tabController.dispose();
     super.onClose();
   }
 }
 
-class Certificate {
+class TherapyCenterCertificate {
   final String id;
   final String title;
   final String issuingOrganization;
@@ -363,8 +392,9 @@ class Certificate {
   final String credentialId;
   final IconData icon;
   final Color color;
+  final String type;
 
-  Certificate({
+  TherapyCenterCertificate({
     required this.id,
     required this.title,
     required this.issuingOrganization,
@@ -373,5 +403,7 @@ class Certificate {
     required this.credentialId,
     required this.icon,
     required this.color,
+    required this.type,
   });
 }
+
