@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/models/job_post.dart';
 
 import '../../models/conversation.dart';
 import '../../models/post.dart';
@@ -581,7 +582,660 @@ class DummyData {
           (user.location?.toLowerCase().contains(query.toLowerCase()) ?? false);
     }).toList();
   }
+
+  // Add these job-related lists to your DummyData class
+// Add to your DummyData class
+// Therapist job related data
+  static final List<String> organizations = [
+    'Apollo Rehabilitation Center',
+    'Fortis Therapy Services',
+    'Max Physical Therapy Clinic',
+    'Medanta Rehabilitation Institute',
+    'Kokilaben Therapy Center',
+    'Manipal Speech & Hearing Center',
+    'Narayana Health Rehabilitation',
+    'Artemis Therapy Services',
+    'Sir HN Reliance Foundation',
+    'TATA Memorial Rehabilitation',
+    'BLK Therapy Center',
+    'Jaslok Therapy Department',
+    'Bombay Hospital Rehabilitation',
+    'Breach Candy Therapy Center',
+    'Lilavati Therapy Services',
+    'Ruby Hall Therapy Clinic',
+    'Christian Medical College Rehabilitation',
+    'Aster DM Healthcare Therapy',
+    'Yashoda Therapy Center',
+    'KIMS Therapy Services',
+    'Care Therapy Institute',
+    'Global Therapy Solutions',
+    'PhysioOne Center',
+    'Rehab Plus Clinic',
+    'Therapy Hub India',
+    'Mindful Healing Center',
+    'Wellness Therapy Clinic',
+    'Healing Hands Rehabilitation',
+    'Progressive Therapy Center',
+    'Holistic Health Therapy',
+  ];
+
+  // Indian Cities
+  static final List<String> locations = [
+    'Mumbai, Maharashtra',
+    'Delhi, NCR',
+    'Bangalore, Karnataka',
+    'Hyderabad, Telangana',
+    'Chennai, Tamil Nadu',
+    'Kolkata, West Bengal',
+    'Pune, Maharashtra',
+    'Ahmedabad, Gujarat',
+    'Jaipur, Rajasthan',
+    'Lucknow, Uttar Pradesh',
+    'Chandigarh, Punjab',
+    'Bhopal, Madhya Pradesh',
+    'Indore, Madhya Pradesh',
+    'Coimbatore, Tamil Nadu',
+    'Kochi, Kerala',
+    'Nagpur, Maharashtra',
+    'Visakhapatnam, Andhra Pradesh',
+    'Surat, Gujarat',
+    'Patna, Bihar',
+    'Guwahati, Assam',
+  ];
+
+  // Therapy Types
+  static final List<String> therapyTypes = [
+    'Physical Therapy',
+    'Occupational Therapy',
+    'Speech Therapy',
+    'Psychotherapy',
+    'Respiratory Therapy',
+    'Music Therapy',
+    'Art Therapy',
+    'Dance Therapy',
+    'Recreational Therapy',
+    'Massage Therapy',
+    'Aquatic Therapy',
+    'Cognitive Behavioral Therapy',
+    'Sports Therapy',
+    'Pediatric Therapy',
+    'Geriatric Therapy',
+    'Neurological Therapy',
+    'Orthopedic Therapy',
+    'Cardiac Rehabilitation',
+    'Pulmonary Rehabilitation',
+    'Mental Health Therapy',
+  ];
+
+  // Job Titles for Therapists
+  static final Map<String, List<String>> therapyTitles = {
+    'Physical Therapy': [
+      'Senior Physical Therapist',
+      'Sports Physical Therapist',
+      'Orthopedic Physical Therapist',
+      'Pediatric Physical Therapist',
+      'Neurological Physical Therapist',
+      'Geriatric Physical Therapist',
+      'Women\'s Health Physical Therapist',
+      'Cardiopulmonary Physical Therapist',
+      'Manual Therapy Specialist',
+      'Vestibular Rehabilitation Therapist',
+    ],
+    'Occupational Therapy': [
+      'Occupational Therapist',
+      'Pediatric Occupational Therapist',
+      'Hand Therapy Specialist',
+      'Neurological Occupational Therapist',
+      'Geriatric Occupational Therapist',
+      'Mental Health Occupational Therapist',
+      'Vocational Rehabilitation Therapist',
+      'Sensory Integration Therapist',
+      'Ergonomics Consultant',
+      'ADL Training Specialist',
+    ],
+    'Speech Therapy': [
+      'Speech Language Pathologist',
+      'Pediatric Speech Therapist',
+      'Voice Therapy Specialist',
+      'Swallowing Therapist (Dysphagia)',
+      'Stuttering Therapy Specialist',
+      'Audiologist',
+      'Communication Disorders Therapist',
+      'Accent Modification Therapist',
+      'Cognitive Communication Therapist',
+      'Augmentative Communication Specialist',
+    ],
+    'Psychotherapy': [
+      'Clinical Psychologist',
+      'Counseling Psychologist',
+      'Child Psychotherapist',
+      'Marriage & Family Therapist',
+      'Cognitive Behavioral Therapist',
+      'Trauma Therapy Specialist',
+      'Addiction Counselor',
+      'Art Psychotherapist',
+      'Music Psychotherapist',
+      'Play Therapy Specialist',
+    ],
+    'Respiratory Therapy': [
+      'Respiratory Therapist',
+      'Pulmonary Function Therapist',
+      'Sleep Therapy Specialist',
+      'Critical Care Respiratory Therapist',
+      'Pediatric Respiratory Therapist',
+      'Asthma Educator',
+      'COPD Rehabilitation Therapist',
+      'Ventilator Management Specialist',
+      'Home Care Respiratory Therapist',
+    ],
+    'Music Therapy': [
+      'Music Therapist',
+      'Neurologic Music Therapist',
+      'Pediatric Music Therapist',
+      'Geriatric Music Therapist',
+      'Mental Health Music Therapist',
+      'Rehabilitation Music Therapist',
+      'Hospice Music Therapist',
+      'Special Education Music Therapist',
+    ],
+  };
+
+  // Salary Ranges in INR (per month)
+  static final Map<String, Map<String, List<int>>> salaryRanges = {
+    'Physical Therapy': {
+      'Entry Level': [25000, 40000],
+      'Mid Level': [40000, 70000],
+      'Senior Level': [70000, 120000],
+      'Specialist': [80000, 150000],
+    },
+    'Occupational Therapy': {
+      'Entry Level': [22000, 38000],
+      'Mid Level': [38000, 65000],
+      'Senior Level': [65000, 110000],
+      'Specialist': [75000, 140000],
+    },
+    'Speech Therapy': {
+      'Entry Level': [28000, 45000],
+      'Mid Level': [45000, 80000],
+      'Senior Level': [80000, 130000],
+      'Specialist': [90000, 160000],
+    },
+    'Psychotherapy': {
+      'Entry Level': [30000, 50000],
+      'Mid Level': [50000, 90000],
+      'Senior Level': [90000, 150000],
+      'Specialist': [100000, 200000],
+    },
+    'Respiratory Therapy': {
+      'Entry Level': [25000, 42000],
+      'Mid Level': [42000, 75000],
+      'Senior Level': [75000, 120000],
+      'Specialist': [85000, 140000],
+    },
+    'Music Therapy': {
+      'Entry Level': [20000, 35000],
+      'Mid Level': [35000, 60000],
+      'Senior Level': [60000, 100000],
+      'Specialist': [70000, 120000],
+    },
+  };
+
+  // Qualifications
+  static final List<String> qualifications = [
+    'BPT (Bachelor of Physiotherapy)',
+    'MPT (Master of Physiotherapy)',
+    'BOT (Bachelor of Occupational Therapy)',
+    'MOT (Master of Occupational Therapy)',
+    'BASLP (Bachelor in Audiology & Speech Language Pathology)',
+    'MASLP (Master in Audiology & Speech Language Pathology)',
+    'MA/MSc Psychology',
+    'MPhil Clinical Psychology',
+    'Diploma in Respiratory Therapy',
+    'Degree in Music Therapy',
+    'Certified Art Therapist',
+    'Certified Dance Therapist',
+    'PG Diploma in Rehabilitation',
+    'PhD in relevant field',
+    'Certification from Indian Association',
+  ];
+
+  // Requirements
+  static final Map<String, List<String>> therapyRequirements = {
+    'Physical Therapy': [
+      'BPT/MPT degree from recognized university',
+      'Valid state therapy license',
+      '2+ years clinical experience',
+      'Knowledge of manual therapy techniques',
+      'Experience with therapeutic exercises',
+      'Good communication skills',
+      'Basic computer skills',
+      'CPR certification',
+      'Experience with electrotherapy equipment',
+    ],
+    'Occupational Therapy': [
+      'BOT/MOT degree',
+      'State registration mandatory',
+      'Experience in rehabilitation setting',
+      'Knowledge of ADL training',
+      'Pediatric experience preferred',
+      'Good assessment skills',
+      'Patient education skills',
+      'Team collaboration ability',
+    ],
+    'Speech Therapy': [
+      'BASLP/MASLP degree',
+      'RCI registration required',
+      'Experience with speech disorders',
+      'Knowledge of assessment tools',
+      'Experience with children/adults',
+      'Good listening skills',
+      'Patience and empathy',
+      'Documentation skills',
+    ],
+    'Psychotherapy': [
+      'MA/MSc Psychology',
+      'MPhil/PhD preferred',
+      'RCI registration mandatory',
+      '2+ years therapy experience',
+      'Knowledge of therapeutic modalities',
+      'Ethical practice knowledge',
+      'Confidentiality maintenance',
+      'Crisis intervention skills',
+    ],
+  };
+
+  // Specializations
+  static final Map<String, List<String>> specializations = {
+    'Physical Therapy': [
+      'Sports Injury Rehabilitation',
+      'Orthopedic Rehabilitation',
+      'Neurological Rehabilitation',
+      'Pediatric Physiotherapy',
+      'Geriatric Care',
+      'Women\'s Health',
+      'Cardiac Rehabilitation',
+      'Vestibular Rehabilitation',
+      'Manual Therapy',
+      'Dry Needling',
+    ],
+    'Occupational Therapy': [
+      'Hand Therapy',
+      'Pediatric OT',
+      'Neurological Rehabilitation',
+      'Mental Health',
+      'Geriatric Care',
+      'Ergonomics',
+      'Sensory Integration',
+      'Vocational Rehabilitation',
+      'ADL Training',
+    ],
+    'Speech Therapy': [
+      'Voice Disorders',
+      'Fluency Disorders',
+      'Language Disorders',
+      'Swallowing Disorders',
+      'Hearing Impairment',
+      'Autism Spectrum',
+      'Accent Modification',
+      'Cognitive Communication',
+    ],
+    'Psychotherapy': [
+      'Cognitive Behavioral Therapy',
+      'Child Psychology',
+      'Trauma Therapy',
+      'Marriage Counseling',
+      'Addiction Therapy',
+      'Anxiety & Depression',
+      'Play Therapy',
+      'Art Therapy',
+    ],
+  };
+
+  // Benefits
+  static final List<String> benefits = [
+    'Health Insurance',
+    'Accident Insurance',
+    'PF & Gratuity',
+    'Paid Time Off',
+    'Sick Leave',
+    'Maternity/Paternity Leave',
+    'Continuing Education Allowance',
+    'Conference Sponsorship',
+    'Professional Membership Fees',
+    'Travel Allowance',
+    'Performance Bonus',
+    'Flexible Working Hours',
+    'Work From Home Options',
+    'Child Care Support',
+    'Gym Membership',
+    'Meal Coupons',
+    'Annual Health Checkup',
+    'Employee Wellness Programs',
+  ];
+
+  // Shifts
+  static final List<String> shifts = [
+    'Day Shift (9 AM - 5 PM)',
+    'Evening Shift (2 PM - 10 PM)',
+    'Morning Shift (7 AM - 3 PM)',
+    'Flexible Hours',
+    'Part-time (4 hours)',
+    'Weekends Only',
+    'Rotational Shifts',
+  ];
+
+  // Descriptions
+  static final Map<String, String> therapyDescriptions = {
+    'Physical Therapy': 'Join our team of dedicated physical therapists providing comprehensive rehabilitation services. Work with diverse patient populations including sports injuries, neurological conditions, and orthopedic cases.',
+    'Occupational Therapy': 'Help patients regain independence in daily activities. Work in a multidisciplinary team focusing on functional rehabilitation and improving quality of life.',
+    'Speech Therapy': 'Provide assessment and intervention for communication and swallowing disorders. Work with both pediatric and adult populations in clinical settings.',
+    'Psychotherapy': 'Offer evidence-based psychological interventions for various mental health conditions. Work in supportive environment with supervision available.',
+    'Respiratory Therapy': 'Specialize in pulmonary rehabilitation and respiratory care. Work with patients with chronic respiratory conditions in hospital and outpatient settings.',
+    'Music Therapy': 'Use music interventions to address physical, emotional, cognitive, and social needs of patients. Work in healthcare, educational, and community settings.',
+  };
+
+  // Generate Dummy Therapist Jobs
+  static List<JobPost> generateTherapistJobs({int count = 50, int appliedCount = 0}) {
+    final List<JobPost> jobs = [];
+    final now = DateTime.now();
+
+    for (int i = 0; i < count; i++) {
+      final seed = i + now.millisecondsSinceEpoch;
+      final therapyIndex = seed % therapyTypes.length;
+      final therapyType = therapyTypes[therapyIndex];
+
+      final titles = therapyTitles[therapyType] ?? ['Therapist'];
+      final titleIndex = (seed * 13) % titles.length;
+      final title = titles[titleIndex];
+
+      final orgIndex = (seed * 17) % organizations.length;
+      final locationIndex = (seed * 19) % locations.length;
+      final typeIndex = seed % 4;
+      final jobTypes = ['Full-time', 'Part-time', 'Contract', 'Internship'];
+      final type = jobTypes[typeIndex];
+
+      // Determine experience level
+      String experienceLevel = 'Entry Level';
+      if (title.contains('Senior') || title.contains('Specialist')) {
+        experienceLevel = 'Senior Level';
+      } else if (title.contains('Mid') || seed % 3 == 0) {
+        experienceLevel = 'Mid Level';
+      }
+
+      // Get salary range
+      final salaryMap = salaryRanges[therapyType] ?? salaryRanges['Physical Therapy']!;
+      final salaryRangeList = salaryMap[experienceLevel] ?? [25000, 40000];
+      final minSalary = salaryRangeList[0];
+      final maxSalary = salaryRangeList[1];
+      final salary = '${(minSalary / 1000).toStringAsFixed(0)}K - ${(maxSalary / 1000).toStringAsFixed(0)}K';
+      final salaryRange = '₹${minSalary.toStringAsFixed(0)} - ₹${maxSalary.toStringAsFixed(0)}';
+
+      // Generate requirements
+      final reqList = therapyRequirements[therapyType] ?? therapyRequirements['Physical Therapy']!;
+      final requirements = <String>[];
+      final reqCount = 3 + (seed % 3);
+      for (int j = 0; j < reqCount; j++) {
+        requirements.add(reqList[(seed + j) % reqList.length]);
+      }
+
+      // Get specialization
+      final specList = specializations[therapyType] ?? specializations['Physical Therapy']!;
+      final specialization = specList[seed % specList.length];
+
+      // Generate benefits
+      final jobBenefits = <String>[];
+      final benefitCount = 4 + (seed % 5);
+      for (int j = 0; j < benefitCount; j++) {
+        jobBenefits.add(benefits[(seed + j) % benefits.length]);
+      }
+
+      // Post dates
+      final daysAgo = 1 + (seed % 14);
+      final postedDate = daysAgo == 1 ? 'Yesterday' : '$daysAgo days ago';
+      final deadline = now.add(Duration(days: 7 + (seed % 21))).toString().substring(0, 10);
+
+      // Shift
+      final shiftIndex = seed % shifts.length;
+      final shift = shifts[shiftIndex];
+
+      // Vacancies
+      final vacancies = 1 + (seed % 5);
+
+      // Qualification
+      final qualIndex = seed % qualifications.length;
+      final qualification = qualifications[qualIndex];
+
+      // Description
+      final description = therapyDescriptions[therapyType] ?? 'Therapist position in reputed healthcare organization.';
+
+      // Contact
+      final orgName = organizations[orgIndex].toLowerCase().replaceAll(RegExp(r'[^a-z]'), '');
+      final contactEmail = 'careers@${orgName}.com';
+      final contactPhone = '+91 ${9000000000 + (seed % 1000000000)}';
+
+      // Urgent, Remote, WalkIn flags
+      final isUrgent = seed % 10 == 0; // 10% urgent
+      final isRemote = (therapyType == 'Psychotherapy' || therapyType == 'Music Therapy') && seed % 3 == 0;
+      final isWalkIn = seed % 15 == 0; // ~7% walk-in
+
+      // Check if this should be applied job
+      final isApplied = i < appliedCount;
+      final appliedDate = isApplied ? now.subtract(Duration(days: (seed % 7))) : null;
+
+      jobs.add(JobPost(
+        id: 'therapy_${therapyType.toLowerCase().replaceAll(' ', '_')}_$i',
+        title: title,
+        organization: organizations[orgIndex],
+        location: locations[locationIndex],
+        salary: salary,
+        salaryRange: salaryRange,
+        type: type,
+        postedDate: postedDate,
+        deadline: deadline,
+        requirements: requirements,
+        description: description,
+        therapyType: therapyType,
+        experience: experienceLevel,
+        isApplied: isApplied,
+        appliedDate: appliedDate,
+        isUrgent: isUrgent,
+        isRemote: isRemote,
+        isWalkIn: isWalkIn,
+        benefits: jobBenefits,
+        contactEmail: contactEmail,
+        contactPhone: contactPhone,
+        minSalary: minSalary,
+        maxSalary: maxSalary,
+        shift: shift,
+        vacancies: vacancies,
+        qualification: qualification,
+        specialization: specialization,
+      ));
+    }
+
+    return jobs;
+  }
+
+  // Get jobs by therapy type
+  static List<JobPost> getJobsByTherapyType(String therapyType, {int count = 10}) {
+    return generateTherapistJobs(count: count)
+        .where((job) => job.therapyType == therapyType)
+        .toList();
+  }
+
+  // Get high salary jobs (above 80K)
+  static List<JobPost> getHighSalaryJobs({int count = 10}) {
+    return generateTherapistJobs(count: count)
+        .where((job) => job.averageSalary > 80000)
+        .toList();
+  }
+
+  // Get remote jobs
+  static List<JobPost> getRemoteJobs({int count = 8}) {
+    return generateTherapistJobs(count: count)
+        .where((job) => job.isRemote)
+        .toList();
+  }
+
+  // Get urgent jobs
+  static List<JobPost> getUrgentJobs({int count = 5}) {
+    return generateTherapistJobs(count: count)
+        .where((job) => job.isUrgent && !job.isExpired)
+        .toList();
+  }
+
+  // Get featured jobs (mix of high salary, urgent, and popular therapy types)
+  static List<JobPost> getFeaturedJobs({int count = 6}) {
+    final allJobs = generateTherapistJobs(count: 20);
+    final featured = <JobPost>[];
+
+    // Add urgent jobs
+    featured.addAll(allJobs.where((job) => job.isUrgent).take(2));
+
+    // Add high salary jobs
+    featured.addAll(allJobs.where((job) => job.averageSalary > 90000).take(2));
+
+    // Add from popular therapy types
+    const popularTherapies = ['Physical Therapy', 'Speech Therapy', 'Psychotherapy'];
+    for (final therapy in popularTherapies) {
+      final therapyJob = allJobs.firstWhere(
+            (job) => job.therapyType == therapy && !featured.contains(job),
+        orElse: () => allJobs.first,
+      );
+      if (!featured.contains(therapyJob)) {
+        featured.add(therapyJob);
+      }
+      if (featured.length >= count) break;
+    }
+
+    return featured;
+  }
+
+  // Get job by ID
+  static JobPost? getJobById(String id) {
+    try {
+      if (id.startsWith('therapy_')) {
+        final parts = id.split('_');
+        if (parts.length >= 3) {
+          final therapyType = parts[1].replaceAll('_', ' ');
+          final index = int.tryParse(parts[2]) ?? 0;
+
+          final jobs = generateTherapistJobs(count: index + 1);
+          return jobs[index];
+        }
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Get all therapy types
+  static List<String> getAllTherapyTypes() {
+    return ['All', ...therapyTypes];
+  }
+
+  // Get all locations
+  static List<String> getAllLocations() {
+    return ['All', ...locations.toSet().toList()];
+  }
+
+  // Get all experience levels
+  static List<String> getAllExperienceLevels() {
+    return ['All', 'Entry Level', 'Mid Level', 'Senior Level', 'Specialist'];
+  }
+
+  // Get all job types
+  static List<String> getAllJobTypes() {
+    return ['All', 'Full-time', 'Part-time', 'Contract', 'Internship', 'Freelance'];
+  }
+
+  // Get salary ranges for filtering
+  static List<Map<String, dynamic>> getSalaryRanges() {
+    return [
+      {'label': 'All', 'min': 0, 'max': 1000000},
+      {'label': 'Under ₹30K', 'min': 0, 'max': 30000},
+      {'label': '₹30K - ₹50K', 'min': 30000, 'max': 50000},
+      {'label': '₹50K - ₹80K', 'min': 50000, 'max': 80000},
+      {'label': '₹80K - ₹1.2L', 'min': 80000, 'max': 120000},
+      {'label': 'Above ₹1.2L', 'min': 120000, 'max': 1000000},
+    ];
+  }
+
+  // Get pre-defined sample jobs for immediate use
+  static List<JobPost> getSampleJobs() {
+    return [
+      JobPost(
+        id: 'therapy_pt_001',
+        title: 'Senior Physical Therapist',
+        organization: 'Apollo Rehabilitation Center',
+        location: 'Mumbai, Maharashtra',
+        salary: '70K - 1.2L',
+        salaryRange: '₹70,000 - ₹1,20,000',
+        type: 'Full-time',
+        postedDate: '2 days ago',
+        deadline: '2024-03-25',
+        requirements: [
+          'MPT degree from recognized university',
+          '5+ years clinical experience',
+          'Specialization in sports injury rehabilitation',
+          'Valid Maharashtra therapy license',
+        ],
+        description: 'Lead physical therapist for sports medicine department. Supervise junior therapists and develop rehabilitation protocols.',
+        therapyType: 'Physical Therapy',
+        experience: 'Senior Level',
+        isApplied: false,
+        isUrgent: true,
+        isRemote: false,
+        isWalkIn: false,
+        benefits: ['Health Insurance', 'PF', 'Annual Bonus', 'CE Allowance'],
+        contactEmail: 'careers@apollorehab.com',
+        contactPhone: '+91 9876543210',
+        minSalary: 70000,
+        maxSalary: 120000,
+        shift: 'Day Shift (9 AM - 5 PM)',
+        vacancies: 2,
+        qualification: 'MPT (Master of Physiotherapy)',
+        specialization: 'Sports Injury Rehabilitation',
+      ),
+      JobPost(
+        id: 'therapy_st_002',
+        title: 'Speech Language Pathologist',
+        organization: 'Manipal Speech & Hearing Center',
+        location: 'Bangalore, Karnataka',
+        salary: '45K - 80K',
+        salaryRange: '₹45,000 - ₹80,000',
+        type: 'Full-time',
+        postedDate: '1 week ago',
+        deadline: '2024-03-30',
+        requirements: [
+          'BASLP/MASLP degree',
+          'RCI registration mandatory',
+          'Experience with pediatric cases',
+          'Good assessment skills',
+        ],
+        description: 'Work with children with speech and language disorders. Conduct assessments and provide therapy sessions.',
+        therapyType: 'Speech Therapy',
+        experience: 'Mid Level',
+        isApplied: true,
+        appliedDate: DateTime.now().subtract(const Duration(days: 2)),
+        isUrgent: false,
+        isRemote: false,
+        isWalkIn: true,
+        benefits: ['Health Insurance', 'PF', 'Paid Leave', 'Training'],
+        contactEmail: 'hr@manipalspeech.com',
+        contactPhone: '+91 8765432109',
+        minSalary: 45000,
+        maxSalary: 80000,
+        shift: 'Flexible Hours',
+        vacancies: 3,
+        qualification: 'MASLP (Master in Audiology & Speech Language Pathology)',
+        specialization: 'Pediatric Speech Therapy',
+      ),
+    ];
+  }
 }
+
 
 // Usage example:
 //
