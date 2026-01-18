@@ -8,9 +8,13 @@ import 'package:myapp/features/dashboards/therapist_dashboard/therapist_dashboar
 import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_dashboard_binding.dart';
 import 'package:myapp/features/dashboards/therapycenter_dashboard/therapycenter_dashboard_view.dart';
 import 'package:myapp/features/home_page/home_page_bindings.dart';
+import 'package:myapp/features/job_post/job_post_bindings.dart';
+import 'package:myapp/features/job_post/job_post_view.dart';
 import 'package:myapp/features/login_page/login_page_binidngs.dart';
 import 'package:myapp/features/message_page/message_page_bindings.dart';
 import 'package:myapp/features/message_page/message_page_view.dart';
+import 'package:myapp/features/my_jobs/my_jobs_bindings.dart';
+import 'package:myapp/features/my_jobs/my_jobs_view.dart';
 import 'package:myapp/features/patients_page/patients_page_bindings.dart';
 import 'package:myapp/features/patients_page/patients_page_view.dart';
 import 'package:myapp/features/profile_views/patient_profile_binidngs.dart';
@@ -54,4 +58,7 @@ GetPage(name:RoutesConstant.conversationPage, page: ()=>ConversationsPageView(),
 GetPage(name:RoutesConstant.messagesPage, page: ()=>MessageDetailView(),binding: MessagePageBindings()),
 GetPage(name:RoutesConstant.patientsPage, page: ()=>PatientsPageView(),binding: PatientsPageBindings()),
 GetPage(name:RoutesConstant.therapistPage, page: ()=>TherapistPageView(),binding: TherapistPageBindings()),
+  GetPage(name:RoutesConstant.myJobs, page: ()=>MyJobsView(),binding: MyJobsBindings()),
+  GetPage(name:RoutesConstant.jobPost, page: ()=>JobPostView(),binding: JobPostBindings()),
+
 ];

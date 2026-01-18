@@ -260,7 +260,7 @@ class HomePageView extends GetView<HomePageController> {
                               title: "Jobs",
                               subtitle: "View All Job Postings",
                               onTap: () {
-                                Get.toNamed(RoutesConstant.communityPage);
+                                Get.toNamed(RoutesConstant.myJobs);
                               },
                             ),
                           } else if(glbv.role !='patient')...{
@@ -276,7 +276,7 @@ class HomePageView extends GetView<HomePageController> {
                               title: "Jobs",
                               subtitle: "Post a new job",
                               onTap: () {
-                                Get.toNamed(RoutesConstant.communityPage);
+                                Get.toNamed(RoutesConstant.jobPost);
                               },
                             ),
                           },
@@ -525,26 +525,28 @@ class HomePageView extends GetView<HomePageController> {
                         ),
                         if (badge != null) ...[
                           const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: badge == "VIP"
-                                  ? luxuryGold
-                                  : badge == "New"
-                                  ? Colors.green
-                                  : primaryTeal,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              badge,
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 9,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.5,
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: badge == "VIP"
+                                    ? luxuryGold
+                                    : badge == "New"
+                                    ? Colors.green
+                                    : primaryTeal,
+                                borderRadius: BorderRadius.circular(5),
+                                ),
+                              child: Text(
+                                badge,
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
+                                ),
                               ),
                             ),
                           ),
