@@ -19,6 +19,7 @@ class SplashPageController extends GetxController{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     glbv.role = preferences.getString('role')??"";
     bool isLoggedIn = preferences.getBool('isLoggedIn')??false;
+    glbv.apiUrl = preferences.getString('api')??'';
     await Future.delayed(Duration(seconds: 2));
     if(isLoggedIn)
       {

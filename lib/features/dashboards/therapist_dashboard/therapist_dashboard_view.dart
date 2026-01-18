@@ -191,7 +191,7 @@ class TherapistDashboardView extends GetView<TherapistDashboardController> {
       children: [
         _buildStatCard(
           title: 'My Rating',
-          value: '${controller.currentRating.value}',
+          value: (controller.currentRating.value.toStringAsFixed(2)),
           subtitle: '/5.0',
           icon: Icons.star_rounded,
           color: Color(0xFFFFD700),

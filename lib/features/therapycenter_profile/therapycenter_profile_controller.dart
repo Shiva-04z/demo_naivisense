@@ -5,6 +5,7 @@ import 'package:myapp/models/user.dart';
 import '../../core/globals/dummy_data.dart';
 import '../../core/globals/global_variables.dart' as glbv;
 import '../../models/post.dart';
+import '../../navigation/routes_constant.dart';
 
 class TherapycenterProfileController extends GetxController with GetSingleTickerProviderStateMixin {
   late String userId;
@@ -172,10 +173,7 @@ class TherapycenterProfileController extends GetxController with GetSingleTicker
   }
 
   void bookAppointment() {
-    Get.toNamed('/book-appointment', arguments: {
-      'center': userProfile,
-      'type': 'center',
-    });
+    Get.toNamed(RoutesConstant.myAi);
   }
 
   void viewCertificateDetails(TherapyCenterCertificate certificate) {

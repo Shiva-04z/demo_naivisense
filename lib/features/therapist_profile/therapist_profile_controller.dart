@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/models/user.dart';
 import '../../core/globals/dummy_data.dart';
 import '../../core/globals/global_variables.dart' as glbv;
+import '../../navigation/routes_constant.dart';
 
 class TherapistProfileController extends GetxController with GetTickerProviderStateMixin {
   late String userId;
@@ -162,7 +163,7 @@ class TherapistProfileController extends GetxController with GetTickerProviderSt
   }
 
   void bookAppointment() {
-    Get.toNamed('/book-appointment', arguments: {'therapist': userProfile});
+    Get.toNamed(RoutesConstant.myAi);
   }
 
   void viewCertificateDetails(Certificate certificate) {

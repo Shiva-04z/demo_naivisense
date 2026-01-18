@@ -305,6 +305,113 @@ class SettingsPageView extends GetView<SettingsPageController> {
               ),
             ),
           ),
+
+        SliverToBoxAdapter(
+          child: Container(
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.teal.withOpacity(0.1),
+                  blurRadius: 20,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.link,
+                        color: Colors.teal[700],
+                        size: 24,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        "Enter Just your Id",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.teal[900],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  TextFormField(
+                    controller: controller.linkcontroller,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.teal[50],
+                      hintText: "eb03fe9b948c",
+                      prefixText: "wss://",
+                      suffixText: ".ngrok-free.app",
+                      hintStyle: TextStyle(color: Colors.teal[300]),
+                      prefixIcon: Icon(Icons.http, color: Colors.teal[400]),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.teal[100]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.teal[400]!, width: 2),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 18,
+                      ),
+                    ),
+                    style: TextStyle(
+                      color: Colors.teal[900],
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        controller.saveUrl(controller.linkcontroller.text);
+
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal[600],
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 0,
+                        shadowColor: Colors.teal.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        "Save URL",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+
+
+          )
         ],
       ),
     );

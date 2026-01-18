@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/models/user.dart';
+import 'package:myapp/navigation/routes_constant.dart';
 
 import '../../core/globals/dummy_data.dart';
 import '../../core/globals/global_variables.dart' as glbv;
@@ -74,6 +75,6 @@ class PatientProfileController extends GetxController  with GetSingleTickerProvi
   }
 
   void talkToAI() {
-    Get.toNamed('/chat', arguments: {'user': userProfile});
+    Get.toNamed(RoutesConstant.myAi);
   }
 }

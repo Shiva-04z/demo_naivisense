@@ -360,7 +360,7 @@ class CommunityPageView extends GetView<CommunityPageController> {
                   ],
                 ),
               ),
-              _buildSeeAllButton(seeAllRoute, Colors.white),
+              // _buildSeeAllButton(seeAllRoute, Colors.white),
             ],
           ),
         ),
@@ -912,41 +912,41 @@ class CommunityPageView extends GetView<CommunityPageController> {
     });
   }
 
-  Widget _buildSeeAllButton(String route, Color textColor) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => Get.toNamed(route),
-          borderRadius: BorderRadius.circular(12.0),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 10.0,
-            ),
-            child: Row(
-              children: [
-                Text(
-                  'View All',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w600,
-                    color: textColor,
-                  ),
-                ),
-                const SizedBox(width: 6.0),
-                Icon(Icons.arrow_forward_rounded, size: 16.0, color: textColor),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildSeeAllButton(String route, Color textColor) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: Colors.white.withOpacity(0.2),
+  //       borderRadius: BorderRadius.circular(12.0),
+  //     ),
+  //     child: Material(
+  //       color: Colors.transparent,
+  //       child: InkWell(
+  //         onTap: () => Get.toNamed(route),
+  //         borderRadius: BorderRadius.circular(12.0),
+  //         child: Padding(
+  //           padding: const EdgeInsets.symmetric(
+  //             horizontal: 16.0,
+  //             vertical: 10.0,
+  //           ),
+  //           child: Row(
+  //             children: [
+  //               Text(
+  //                 'View All',
+  //                 style: TextStyle(
+  //                   fontSize: 14.0,
+  //                   fontWeight: FontWeight.w600,
+  //                   color: textColor,
+  //                 ),
+  //               ),
+  //               const SizedBox(width: 6.0),
+  //               Icon(Icons.arrow_forward_rounded, size: 16.0, color: textColor),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildFloatingActionButton() {
     return Container(
@@ -1212,7 +1212,10 @@ class CommunityPageView extends GetView<CommunityPageController> {
                       backgroundColor: _getRoleColor(user.role),
                       shape: ContinuousRectangleBorder(borderRadius: BorderRadiusGeometry.circular(16))
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      glbv.selectedUserId = user.id;
+                      Get.toNamed(RoutesConstant.myAi);
+                    },
                     icon: Icon(Iconsax.designtools,color: Colors.white,),
                     label: Text(
                       "Talk To AI",

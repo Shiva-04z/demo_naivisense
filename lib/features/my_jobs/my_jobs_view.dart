@@ -65,7 +65,7 @@ class MyJobsView extends GetView<MyJobsController> {
             // Stats Bar (Optional)
             _buildStatsBar(),
             // Filter Panel
-            Obx(() => _buildFilterPanel()),
+           _buildFilterPanel(),
             // Main Content
             Expanded(
               child: TabBarView(
@@ -137,7 +137,6 @@ class MyJobsView extends GetView<MyJobsController> {
   }
 
   Widget _buildStatsBar() {
-    return Obx(() {
       final stats = controller.getJobStatistics();
       return FadeIn(
         duration: const Duration(milliseconds: 400),
@@ -175,7 +174,7 @@ class MyJobsView extends GetView<MyJobsController> {
           ),
         ),
       );
-    });
+
   }
 
   Widget _buildStatItem({
@@ -216,44 +215,46 @@ class MyJobsView extends GetView<MyJobsController> {
         child: Container(
           color: Colors.white,
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Quick Filters',
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF2C2C2C),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: controller.clearAllFilters,
-                    child: Text(
-                      'Clear All',
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Quick Filters',
                       style: GoogleFonts.poppins(
-                        color: const Color(0xFFD4AF37),
-                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF2C2C2C),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              // Therapy Type Filter
-              _buildFilterChips(
-                title: 'Therapy Type',
-                selectedValue: controller.filterTherapyType.value,
-                options: controller.therapyTypes,
-                onChanged: (value) => controller.filterTherapyType.value = value,
-              ),
-              const SizedBox(height: 12),
-              // Sort Options
-              _buildSortDropdown(),
-            ],
+                    TextButton(
+                      onPressed: controller.clearAllFilters,
+                      child: Text(
+                        'Clear All',
+                        style: GoogleFonts.poppins(
+                          color: const Color(0xFFD4AF37),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Therapy Type Filter
+                _buildFilterChips(
+                  title: 'Therapy Type',
+                  selectedValue: controller.filterTherapyType.value,
+                  options: controller.therapyTypes,
+                  onChanged: (value) => controller.filterTherapyType.value = value,
+                ),
+                const SizedBox(height: 12),
+                // Sort Options
+                _buildSortDropdown(),
+              ],
+            ),
           ),
         ),
       );
@@ -346,46 +347,41 @@ class MyJobsView extends GetView<MyJobsController> {
   }
 
   Widget _buildAllJobsTab() {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return const Center(
+    return controller.isLoading.value? Center(
           child: CircularProgressIndicator(
             color: Color(0xFF008080),
           ),
-        );
-      }
+        ):
 
-      return CustomScrollView(
+
+     CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
           // Job Count and Sort
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             sliver: SliverToBoxAdapter(
-              child: FadeIn(
-                duration: const Duration(milliseconds: 400),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${controller.filteredJobs.length} therapist jobs',
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        color: const Color(0xFF004D4D),
-                        fontWeight: FontWeight.w600,
-                      ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${controller.filteredJobs.length} therapist jobs',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: const Color(0xFF004D4D),
+                      fontWeight: FontWeight.w600,
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Iconsax.sort,
-                        size: 20,
-                        color: const Color(0xFF004D4D),
-                      ),
-                      onPressed: () => _showSortModal(Get.context!),
-                      tooltip: 'Sort',
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Iconsax.sort,
+                      size: 20,
+                      color: const Color(0xFF004D4D),
                     ),
-                  ],
-                ),
+                    onPressed: () => _showSortModal(Get.context!),
+                    tooltip: 'Sort',
+                  ),
+                ],
               ),
             ),
           ),
@@ -489,11 +485,11 @@ class MyJobsView extends GetView<MyJobsController> {
             ),
         ],
       );
-    });
+
   }
 
   Widget _buildAppliedJobsTab() {
-    return Obx(() {
+
       if (controller.appliedJobs.isEmpty) {
         return FadeIn(
           duration: const Duration(milliseconds: 500),
@@ -676,7 +672,7 @@ class MyJobsView extends GetView<MyJobsController> {
           ),
         ],
       );
-    });
+
   }
 
   Widget _buildApplicationStat({
@@ -776,8 +772,10 @@ class MyJobsView extends GetView<MyJobsController> {
                                 size: 20,
                                 color: const Color(0xFF2C2C2C).withOpacity(0.6),
                               ),
+                              color: Colors.white,
                               itemBuilder: (context) => [
                                 PopupMenuItem(
+
                                   child: Row(
                                     children: [
                                       Icon(
@@ -1088,6 +1086,7 @@ class MyJobsView extends GetView<MyJobsController> {
 
   Widget _buildRecommendedCard(JobPost job) {
     return Card(
+      color: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -1251,109 +1250,111 @@ class MyJobsView extends GetView<MyJobsController> {
           builder: (context, setState) {
             return Container(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Advanced Filters',
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF2C2C2C),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Advanced Filters',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0xFF2C2C2C),
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Iconsax.close_circle),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Therapy Type Filter
-                  _buildFilterSection(
-                    title: 'Therapy Type',
-                    selectedValue: controller.filterTherapyType.value,
-                    options: controller.therapyTypes,
-                    onChanged: (value) {
-                      controller.filterTherapyType.value = value;
-                      setState(() {});
-                    },
-                  ),
-
-                  // Location Filter
-                  _buildFilterSection(
-                    title: 'Location',
-                    selectedValue: controller.filterLocation.value,
-                    options: controller.locations,
-                    onChanged: (value) {
-                      controller.filterLocation.value = value;
-                      setState(() {});
-                    },
-                  ),
-
-                  // Experience Filter
-                  _buildFilterSection(
-                    title: 'Experience Level',
-                    selectedValue: controller.filterExperience.value,
-                    options: controller.experienceLevels,
-                    onChanged: (value) {
-                      controller.filterExperience.value = value;
-                      setState(() {});
-                    },
-                  ),
-
-                  // Salary Range Filter
-                  _buildSalaryFilterSection(),
-
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: controller.clearAllFilters,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: const Color(0xFFD4AF37),
-                            side: const BorderSide(color: Color(0xFFD4AF37)),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                        IconButton(
+                          icon: const Icon(Iconsax.close_circle),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                
+                    // Therapy Type Filter
+                    _buildFilterSection(
+                      title: 'Therapy Type',
+                      selectedValue: controller.filterTherapyType.value,
+                      options: controller.therapyTypes,
+                      onChanged: (value) {
+                        controller.filterTherapyType.value = value;
+                        setState(() {});
+                      },
+                    ),
+                
+                    // Location Filter
+                    _buildFilterSection(
+                      title: 'Location',
+                      selectedValue: controller.filterLocation.value,
+                      options: controller.locations,
+                      onChanged: (value) {
+                        controller.filterLocation.value = value;
+                        setState(() {});
+                      },
+                    ),
+                
+                    // Experience Filter
+                    _buildFilterSection(
+                      title: 'Experience Level',
+                      selectedValue: controller.filterExperience.value,
+                      options: controller.experienceLevels,
+                      onChanged: (value) {
+                        controller.filterExperience.value = value;
+                        setState(() {});
+                      },
+                    ),
+                
+                    // Salary Range Filter
+                    _buildSalaryFilterSection(),
+                
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: controller.clearAllFilters,
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: const Color(0xFFD4AF37),
+                              side: const BorderSide(color: Color(0xFFD4AF37)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                          child: Text(
-                            'Clear All',
-                            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            controller.showFilters.value = false;
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF008080),
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                            child: Text(
+                              'Clear All',
+                              style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                          child: Text(
-                            'Apply Filters',
-                            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                ],
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              controller.showFilters.value = false;
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF008080),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                            child: Text(
+                              'Apply Filters',
+                              style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
               ),
             );
           },
@@ -1596,7 +1597,7 @@ class MyJobsView extends GetView<MyJobsController> {
                   crossAxisCount: 2,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 3,
+                  childAspectRatio: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 8,
                   children: [
@@ -1770,6 +1771,7 @@ class MyJobsView extends GetView<MyJobsController> {
     required String value,
   }) {
     return Container(
+      height: 100,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA),

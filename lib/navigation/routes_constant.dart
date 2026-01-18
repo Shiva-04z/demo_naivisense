@@ -18,4 +18,5 @@ class RoutesConstant {
   static String therapistPage = "/therapist_page_view";
   static String myJobs= "/my_jobs_view";
   static String jobPost = "/job_post_view";
+  static String myAi = "/my_ai_view";
 }
